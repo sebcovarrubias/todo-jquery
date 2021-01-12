@@ -7,8 +7,8 @@ $(document).ready(() => {
 
 		event.preventDefault();
 
-		if( $("#add")[0].value !== "") {
-			
+		if ( $("#add")[0].value) {
+
 			$.ajax({
 				type: "POST",
 				url: "/api/add",

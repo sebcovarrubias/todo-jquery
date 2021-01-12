@@ -1,6 +1,7 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 let app = new express();
+let port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended:true}));
@@ -16,6 +17,6 @@ app.post("/api/complete", (req, res) => {
 	res.json(req.body.data);
 });
 
-app.listen(process.env.PORT, () => {
-	console.log("Listening on Port 3000");
+app.listen(port, () => {
+	console.log(`Listening on Port ${port}`);
 });
