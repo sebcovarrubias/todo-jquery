@@ -12,6 +12,7 @@ app.post("/api/add", (req, res) => {
 
 app.post("/api/complete", (req, res) => {
 	// data is an array of objects with id, value keys
+	//  id is the client side id for the task's element
 	res.json(req.body.data);
 });
 
