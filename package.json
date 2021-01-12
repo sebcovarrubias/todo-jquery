@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/sebcovarrubias/todo-jquery/issues"
   },
-  "homepage": "https://github.com/sebcovarrubias/todo-jquery#readme"
+  "homepage": "https://github.com/sebcovarrubias/todo-jquery#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
