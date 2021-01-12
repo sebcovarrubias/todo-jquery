@@ -13,8 +13,10 @@ $(document).ready(() => {
 			data: {data:$("#add")[0].value},
 			success: data => {
 				$("#add").val('');
-				$("#complete-button").before(`<div id="task-${idIncrement}"><label>${data}</label>
+				$(".tasks").append(`<div id="task-${idIncrement}" class="row ml-1">
+					<label class="border border-secondary rounded col-10 mt-auto"><b>${data}</b></label>
 					<input type="checkbox" value="${data}"></div>`);
+				$(`#task-${idIncrement}`).find("input").addClass("form-control col-2 mt-1 mb-1");
 				idIncrement++;
 			}
 		});
@@ -43,7 +45,7 @@ $(document).ready(() => {
 			success: data => {
 				// move tasks to completed area
 				data.forEach(task => {
-					$(`<div id="${task.id}">${task.value}</div>`).appendTo(".done");
+					$(".done").append(`<div id="${task.id}" class="border rounded ml-1 mr-1 mb-1"><b class="ml-1">${task.value}</b></div>`);
 					$(`#${task.id}`).remove();
 					idIncrement--;
 				});
@@ -51,5 +53,7 @@ $(document).ready(() => {
 		});
 
 	});
+
+
 
 });
