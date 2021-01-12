@@ -9,7 +9,7 @@ $(document).ready(() => {
 
 		$.ajax({
 			type: "POST",
-			url: "/add",
+			url: "/api/add",
 			data: {data:$("#add")[0].value},
 			success: data => {
 				$("#add").val('');

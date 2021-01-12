@@ -6,7 +6,7 @@ app.use(express.static(__dirname + "/public"));
 
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.post("/add",(req, res) => {
+app.post("/api/add",(req, res) => {
 	res.send(req.body.data);
 });
 
