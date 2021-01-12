@@ -7,19 +7,22 @@ $(document).ready(() => {
 
 		event.preventDefault();
 
-		$.ajax({
-			type: "POST",
-			url: "/api/add",
-			data: {data:$("#add")[0].value},
-			success: data => {
-				$("#add").val('');
-				$(".tasks").append(`<div id="task-${idIncrement}" class="row ml-1">
-					<label class="border border-secondary rounded col-10 mt-auto"><b>${data}</b></label>
-					<input type="checkbox" value="${data}"></div>`);
-				$(`#task-${idIncrement}`).find("input").addClass("form-control col-2 mt-1 mb-1");
-				idIncrement++;
-			}
-		});
+		if( $("#add")[0].value !== "") {
+			
+			$.ajax({
+				type: "POST",
+				url: "/api/add",
+				data: {data:$("#add")[0].value },
+				success: data => {
+					$("#add").val('');
+					$(".tasks").append(`<div id="task-${idIncrement}" class="row ml-1">
+						<label class="border border-secondary rounded col-10 mt-auto"><b>${data}</b></label>
+						<input type="checkbox" value="${data}"></div>`);
+					$(`#task-${idIncrement}`).find("input").addClass("form-control col-2 mt-1 mb-1");
+					idIncrement++;
+				}
+			});
+		}
 		
 	});
 
