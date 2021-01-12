@@ -1,9 +1,9 @@
 $(document).ready(() => {
-	// Create an empty list of tasks
-	let tasks = [];
+
+	let idIncrement = 1;
 
 	// send a new task to the server
-	$("form").submit(event => {
+	$("#add-task").submit(event => {
 
 		event.preventDefault();
 
@@ -13,14 +13,43 @@ $(document).ready(() => {
 			data: {data:$("#add")[0].value},
 			success: data => {
 				$("#add").val('');
-				tasks.push(data);
+				$("#complete-button").before(`<div id="task-${idIncrement}"><label>${data}</label>
+					<input type="checkbox" value="${data}"></div>`);
+				idIncrement++;
 			}
 		});
 		
 	});
 
-	// // Add checkboxes to submit a POST request when tasks are done
+	// POST request on task completion
+	$("#completed-tasks").submit(event => {
 
-	// // show completed tasks
+		event.preventDefault();
+		let newData = [];
+
+		$.each($("input:checked"), (i, data) => {
+
+			newData.push({
+				id: $(data).parent()[0].id,
+				value: data.value
+			});
+
+		});
+
+		$.ajax({
+			type: "POST",
+			url: "/api/complete",
+			data: {data: newData},
+			success: data => {
+				// move tasks to completed area
+				data.forEach(task => {
+					$(`<div id="${task.id}">${task.value}</div>`).appendTo(".done");
+					$(`#${task.id}`).remove();
+					idIncrement--;
+				});
+			}
+		});
+
+	});
 
 });
