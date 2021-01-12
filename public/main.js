@@ -22,7 +22,7 @@ $(document).ready(() => {
 	});
 
 	// POST request on task completion
-	$("#completed-tasks").submit(event => {
+	$("#current-tasks").submit(event => {
 
 		event.preventDefault();
 		let newData = [];
