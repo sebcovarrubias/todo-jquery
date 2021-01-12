@@ -5,10 +5,6 @@ let app = new express();
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended:true}));
 
-// app.get("/", (req, res, next) => {
-// 	next();
-// });
-
 app.post("/api/add", (req, res) => {
 	// data is a string
 	res.send(req.body.data);
