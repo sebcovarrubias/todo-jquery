@@ -33,7 +33,6 @@ app.post("/api/signup", (req, res) => {
 	console.log(req.body.password);
 });
 
-
 // Handle Adding Tasks
 app.post("/api/add", (req, res) => {
 	// data is a string
@@ -54,3 +53,4 @@ app.post("/api/complete", (req, res) => {
 app.listen(port, () => {
 	console.log(`Listening on Port ${port}`);
 });
+
