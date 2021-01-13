@@ -49,8 +49,7 @@ $(document).ready(() => {
 				// move tasks to completed area
 				data.forEach(task => {
 					$(".done").append(`<div id="${task.id}" class="border rounded ml-1 mr-1 mb-1"><b class="ml-1">${task.value}</b></div>`);
-					$(`#${task.id}`).remove();
-					idIncrement--;
+					$(`#${task.id}`).hide();
 				});
 			}
 		});
