@@ -1,21 +1,55 @@
 <!doctype html>
 <html lang="en">
-
+	<!-- HEAD -->
 	<head>
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+		<!-- Dependencies -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
+
+		<!-- Scripts -->
 		<script src="./main.js"></script>
 	</head>
-
+	<!-- BODY -->
 	<body class="bg-secondary">
+
 		<br>
+		<!-- Container -->
 		<div class="container bg-light border rounded border-primary">
+
+			<!-- Login and Sign Up Buttons -->
+			<button class="btn btn-block btn-dark mt-1" data-toggle="modal" data-target="#login-modal">Log In</button>
+			<button class="btn btn-block btn-info mb-1" data-toggle="modal" data-target="#signup-modal">Sign Up</button>
+
+			<!-- Login Modal -->
+			<div class="modal" id="login-modal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Sign up Modal -->
+			<div class="modal" id="signup-modal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Add Task Form -->
 			<div class="add">
 
 				<form class="row" id="add-task">
@@ -28,6 +62,7 @@
 
 			</div><br>
 
+			<!-- Current Tasks List/Form -->
 			<div class="added">
 
 				<form id="current-tasks">
@@ -42,6 +77,7 @@
 
 			</div><br>
 
+			<!-- Completed Tasks -->
 			<div class="border rounded done">
 				<h2 class="text-center">Done</h2>		
 			</div>
