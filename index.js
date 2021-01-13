@@ -6,6 +6,18 @@ let port = process.env.PORT || 3000;
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended:true}));
 
+// Handle Login
+app.post("/api/login", (req, res) => {
+	console.log(req.body.username);
+	console.log(req.body.password);
+});
+
+// Handle Sign Up
+app.post("/api/signup", (req, res) => {
+	console.log(req.body.username);
+	console.log(req.body.password);
+});
+
 app.post("/api/add", (req, res) => {
 	// data is a string
 	res.send(req.body.data);
