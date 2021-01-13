@@ -1,5 +1,7 @@
 $(document).ready(() => {
 
+	let idIncrement = 1;
+
 	// Handle User Login
 	$("#login-user").submit(event => {
 
@@ -23,10 +25,14 @@ $(document).ready(() => {
 				},
 
 				success: data => {
+					// Close modal
+					// Clear screen
+					// Populate DOM with tasks
 					console.log("success");
 				},
 
 				error: (xhr, err) => {
+					// Create DOM element in modal for error
 					console.log(err);
 				}
 			});
@@ -58,10 +64,14 @@ $(document).ready(() => {
 				},
 
 				success: data => {
+					// Close modal
+					// Clear screen
+					// Populate DOM with tasks
 					console.log("success");
 				},
 
 				error: (xhr, err) => {
+					// Create DOM element in modal for error
 					console.log(err);
 				}
 			});
@@ -69,8 +79,6 @@ $(document).ready(() => {
 		}
 
 	});
-
-	let idIncrement = 1;
 
 	// send a new task to the server
 	$("#add-task").submit(event => {
@@ -90,6 +98,7 @@ $(document).ready(() => {
 					$(".tasks").append(`<div id="task-${idIncrement}" class="row ml-1">
 						<label class="border border-secondary rounded col-10 mt-auto"><b>${data}</b></label>
 						<input type="checkbox" value="${data}"></div>`);
+
 					$(`#task-${idIncrement}`).find("input").addClass("form-control col-2 mt-1 mb-1");
 
 					idIncrement++;
