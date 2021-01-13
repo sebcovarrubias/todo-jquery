@@ -24,16 +24,29 @@
 		<div class="container bg-light border rounded border-primary">
 
 			<!-- Login and Sign Up Buttons -->
-			<button class="btn btn-block btn-dark mt-1" data-toggle="modal" data-target="#login-modal">Log In</button>
+			<button class="btn btn-block btn-dark mt-1" data-toggle="modal" data-target="#login-modal">Login</button>
 			<button class="btn btn-block btn-info mb-1" data-toggle="modal" data-target="#signup-modal">Sign Up</button>
 
 			<!-- Login Modal -->
 			<div class="modal" id="login-modal">
 				<div class="modal-dialog">
 					<div class="modal-content">
-						<div class="modal-header">
+						<div class="modal-header text-center">
+
+							<h4 class="modal-title">Login</h4>
 
 						</div>
+
+						<div class="modal-body">
+
+							<form class="row">
+								<input class="col ml-1 mr-1" name="username" id="login-username" placeholder="username">
+								<input class="col mr-1" name="password" id="login-password" placeholder="password">
+								<input class="col mr-1 btn btn-primary" type="submit" value="Submit">
+							</form>
+
+						</div>
+							
 					</div>
 				</div>
 			</div>
@@ -42,9 +55,22 @@
 			<div class="modal" id="signup-modal">
 				<div class="modal-dialog">
 					<div class="modal-content">
-						<div class="modal-header">
-							
+						<div class="modal-header text-center">
+
+							<h4 class="modal-title">Sign Up</h4>
+
 						</div>
+
+						<div class="modal-body">
+
+							<form class="row">
+								<input class="col ml-1 mr-1" name="username" id="signup-username" placeholder="username">
+								<input class="col mr-1" name="password" id="signup-password" placeholder="password">
+								<input class="col mr-1 btn btn-primary" type="submit" value="Submit">
+							</form>
+
+						</div>
+							
 					</div>
 				</div>
 			</div>
