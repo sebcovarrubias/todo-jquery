@@ -1,6 +1,7 @@
 $(document).ready(() => {
 
 	let idIncrement = 1;
+	let dbUsername ="";
 
 	// Handle User Login
 	$("#login-user").submit(event => {
@@ -37,8 +38,11 @@ $(document).ready(() => {
 					$("#login-button").hide();
 					$("#signup-button").hide();
 					// Set username as id in html
-					$(".container").prepend(`<h1 class="text-center">Hi, <span id="username">${data.username}</span>!</h1>`);
+					$(".container").prepend(`<h1 class="text-center">Hi, ${data.username}!</h1>`);
+					dbUsername = data.username;
+					idIncrement = 1;
 					// Populate DOM with tasks
+
 				},
 
 				error: (xhr, err) => {
@@ -86,7 +90,9 @@ $(document).ready(() => {
 					$("#login-button").hide();
 					$("#signup-button").hide();
 					// Set username as id in html
-					$(".container").prepend(`<h1 class="text-center">Hi, <span id="username">${data}</span>!</h1>`);
+					$(".container").prepend(`<h1 class="text-center">Hi, ${data}!</h1>`);
+					dbUsername = data;
+					idIncrement = 1;
 				},
 
 				error: (xhr, err) => {
@@ -104,12 +110,29 @@ $(document).ready(() => {
 
 		event.preventDefault();
 
-		if ( $("#add")[0].value ) {
+		// if not logged in, no server requests needed
+		if (!dbUsername && $("#add")[0].value) {
+			// add task in html
+			$("#tasks").append(`<div id="task-${idIncrement}" class="row ml-1">
+				<label class="border border-secondary rounded col-10 mt-auto"><b>${$("#add")[0].value}</b></label>
+				<input type="checkbox" value="${$("#add")[0].value}"></div>`);
+			// clear task input
+			$("#add").val("");
+
+			$(`#task-${idIncrement}`).find("input").addClass("form-control col-2 mt-1 mb-1");
+
+			idIncrement++;
+
+		// if logged in
+		} else if ( $("#add")[0].value ) {
 
 			$.ajax({
 				type: "POST",
 				url: "/api/add",
-				data: {data:$("#add")[0].value },
+				data: {
+					username: dbUsername,
+					task: $("#add")[0].value
+				},
 
 				success: data => {
 					// clear task input
@@ -143,24 +166,31 @@ $(document).ready(() => {
 
 		});
 
-		$.ajax({
-			type: "POST",
-			url: "/api/complete",
-			data: {data: newData},
+		// if not logged in, no server requests needed
+		if (!dbUsername && newData.length) {
 
-			success: data => {
-				// move tasks to completed area
-				$.each(data, (i, task) => {
-					// hide task from current tasks area
-					$(`#${task.id}`).hide();
-					// set html to empty (save for id purposes)
-					$(`#${task.id}`).html("");
-					// add task in html
-					$(".done").append(`<div class="border rounded ml-1 mr-1 mb-1"><b class="ml-1">${task.value}</b></div>`);
-					
-				});
-			}
-		});
+		} else if (newData.length) {
+
+			$.ajax({
+				type: "POST",
+				url: "/api/complete",
+				data: {data: newData},
+
+				success: data => {
+					// move tasks to completed area
+					$.each(data, (i, task) => {
+						// hide task from current tasks area
+						$(`#${task.id}`).hide();
+						// set html to empty (save for id purposes)
+						$(`#${task.id}`).html("");
+						// add task in html
+						$(".done").append(`<div class="border rounded ml-1 mr-1 mb-1"><b class="ml-1">${task.value}</b></div>`);
+						
+					});
+				}
+			});
+
+		}
 
 	});
 
