@@ -2,6 +2,8 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let app = new express();
 let port = process.env.PORT || 3000;
+let mongoose = require('mongoose');
+let bcrypt = require('bcrypt');
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended:true}));
