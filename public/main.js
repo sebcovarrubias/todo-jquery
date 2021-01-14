@@ -146,7 +146,6 @@ $(document).ready(() => {
 
 					idIncrement++;
 					// remove previous error DOM if present
-					console.log(data);
 				},
 
 				error: (xhr, err) => {
