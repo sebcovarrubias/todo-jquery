@@ -21,7 +21,7 @@ $(document).ready(() => {
 
 				data: {
 					username: username,
-					password:password
+					password: password
 				},
 
 				success: data => {

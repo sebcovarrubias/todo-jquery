@@ -1,7 +1,8 @@
 let mongoose = require("mongoose");
 
 // install npm .env and put this in gitignore later
-mongoose.connect("mongodb://127.0.0.1:27017/?compressors=zlib&gssapiServiceName=mongodb", { useNewUrlParser: true, useUnifiedTopology: true });
+let mongoURI = process.env.mongoURI || "mongodb://127.0.0.1:27017/?compressors=zlib&gssapiServiceName=mongodb";
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 let userSchema = new mongoose.Schema({
 	username: {type: String, required: true},
@@ -63,7 +64,7 @@ let addTask = (username, task, done) => {
 
 // Remove Task from DB 
 let removeTask = (taskId, done) => {
-	Task.remove({_id:taskId}, (err, data) => {
+	Task.findByIdAndDelete(taskId, (err, data) => {
 		if (err) {
 			done(err);
 		} else {
