@@ -37,8 +37,8 @@ $(document).ready(() => {
 					$("#login-button").hide();
 					$("#signup-button").hide();
 					// Set username as id in html
+					$(".container").prepend(`<h1 class="text-center">Hi, <span id="username">${data.username}</span>!</h1>`);
 					// Populate DOM with tasks
-					console.log(data);
 				},
 
 				error: (xhr, err) => {
@@ -86,7 +86,7 @@ $(document).ready(() => {
 					$("#login-button").hide();
 					$("#signup-button").hide();
 					// Set username as id in html
-					console.log(data);
+					$(".container").prepend(`<h1 class="text-center">Hi, <span id="username">${data}</span>!</h1>`);
 				},
 
 				error: (xhr, err) => {
