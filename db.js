@@ -85,3 +85,11 @@ const findUserTasks = (username, done) => {
 		}
 	});
 }
+
+exports.UserModel = User;
+exports.TaskModel = Task;
+exports.findUser = findUser;
+exports.addUser = addUser;
+exports.addTask = addTask;
+exports.removeTask = removeTask;
+exports.findUserTasks = findUserTasks
