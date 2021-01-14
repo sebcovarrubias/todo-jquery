@@ -1,7 +1,7 @@
 let mongoose = require("mongoose");
 
 // install npm .env and put this in gitignore later
-mongoose.connect("mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://127.0.0.1:27017/?compressors=zlib&gssapiServiceName=mongodb", { useNewUrlParser: true, useUnifiedTopology: true });
 
 let userSchema = new mongoose.Schema({
 	username: {type: String, required: true},
@@ -30,11 +30,10 @@ let findUser = (username, done) => {
 }
 
 // Add User to DB
-let addUser = (username, hash, salt, done) => {
+let addUser = (username, hash, done) => {
 	let newUser = new User({
 		username: username,
-		hash: hash,
-		salt: salt
+		hash: hash
 	});
 
 	newUser.save((err, data) => {
@@ -47,7 +46,7 @@ let addUser = (username, hash, salt, done) => {
 }
 
 // Add Task to DB
-let addTask = (task, username, done) => {
+let addTask = (username, task, done) => {
 	let newTask = new Task({
 		username: username,
 		task: task
