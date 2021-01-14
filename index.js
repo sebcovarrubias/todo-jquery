@@ -21,7 +21,7 @@ app.post("/api/login", (req, res) => {
 	// check if username exists in db
 	findUser(req.body.username, (err, user) => {
 		if (err) {
-			res.end();
+			res.sendStatus(500);
 		} else if (user) {
 			// User found
 			// check password with bcrypt
@@ -30,26 +30,27 @@ app.post("/api/login", (req, res) => {
 			bcrypt.compare(req.body.password, user.hash, (err, result) => {
 				if (err) {
 					// Password did not match, Return Login Error
-					console.log("Password did not match, Return Login Error");
-					res.end();
+					res.sendStatus(403);
 				} else {
 					// user found, return user tasks
 					findUserTasks(user.username, (err, tasks) => {
 						if (err) {
 							// could not get tasks, return Login Error
-							console.log("could not get tasks, return Login Error");
-							res.end();
+							res.sendStatus(500);
 						} else {
-							// return tasks
-							res.json(tasks);
+							// return tasks and username
+							res.json({
+								username: user.username,
+								tasks: tasks
+							});
 						}
 					});
 				}
 			});
 
-			console.log(user);
 		} else {
-			res.end();
+			// User Not Found
+			res.sendStatus(404);
 		}
 	});
 		
@@ -61,7 +62,7 @@ app.post("/api/signup", (req, res) => {
 	// check if username exists in db
 	findUser(req.body.username, (err, user) => {
 		if (err) {
-			res.end();
+			res.sendStatus(500);
 		} else if (!user) {
 
 			// User Not Found
@@ -70,19 +71,16 @@ app.post("/api/signup", (req, res) => {
 			bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
 				if (err) {
 					// Could not hash, return Sign Up Error
-					console.log("Could not hash, return Sign Up Error");
-					res.end();
+					res.sendStatus(500);
 				} else {
 
 					addUser(req.body.username, hash, (err, result) => {
 						if (err) {
 							// Could not add user, return Sign Up Error
-							console.log("Could not add user, return Sign Up Error");
-							res.end();
+							res.sendStatus(500);
 						} else {
-							// added user
-							console.log(result);
-							res.end();
+							// added user, return username for adding tasks
+							res.send(result.username);
 						}
 
 					});
@@ -92,9 +90,9 @@ app.post("/api/signup", (req, res) => {
 			});
 
 		} else {
-			// User found, return Sign Up error
+			// User already found, return Sign Up error
 			console.log("User found, return Sign Up error");
-			res.end();
+			res.sendStatus(403);
 		}
 
 	});

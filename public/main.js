@@ -26,9 +26,11 @@ $(document).ready(() => {
 
 				success: data => {
 					// Close modal
+					$("#login-modal").modal("toggle");
 					// Clear screen
 					// Populate DOM with tasks
-					console.log("success");
+					// Set username as id in html
+					console.log(data);
 				},
 
 				error: (xhr, err) => {
@@ -65,9 +67,10 @@ $(document).ready(() => {
 
 				success: data => {
 					// Close modal
+					$("#signup-modal").modal("toggle");
 					// Clear screen
-					// Populate DOM with tasks
-					console.log("success");
+					// Set username as id in html
+					console.log(data);
 				},
 
 				error: (xhr, err) => {
