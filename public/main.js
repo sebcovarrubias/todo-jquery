@@ -184,12 +184,16 @@ $(document).ready(() => {
 
 		// if not logged in, no server requests needed
 		if (!dbUsername && newData.length) {
-			// hide task from current tasks area
-			$(`#${task.id}`).hide();
-			// set html to empty (save for id purposes)
-			$(`#${task.id}`).html("");
-			// add task in html
-			$(".done").append(`<div class="border rounded ml-1 mr-1 mb-1"><b class="ml-1">${task.value}</b></div>`);
+			// move tasks to completed area
+			$.each(newData, (i, task) => {
+				// hide task from current tasks area
+				$(`#${task.id}`).hide();
+				// set html to empty (save for id purposes)
+				$(`#${task.id}`).html("");
+				// add task in html
+				$(".done").append(`<div class="border rounded ml-1 mr-1 mb-1"><b class="ml-1">${task.value}</b></div>`);
+						
+			});
 
 		} else if (newData.length) {
 
