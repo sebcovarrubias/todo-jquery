@@ -107,18 +107,51 @@ app.post("/api/add", (req, res) => {
 		if (err) {
 			res.sendStatus(500);
 		} else {
-			res.send(data.task);
+			res.json({
+				taskId: data._id,
+				task: data.task
+			});
 		}
 	});
 });
 
+let removeTask = require("./db.js").removeTask;
+
 // Handle Completed Tasks
 app.post("/api/complete", (req, res) => {
-	// data is an array of objects with id, value keys
-	//  id is the client side id for the task's element
-	res.json(req.body.data);
+	// data is an array of objects with dom-id and 
+	// server task-id
+	let complete = [];
 
-	// remove tasks from db
+	var promise = new Promise( (resolve, reject) => {
+
+		req.body.data.forEach(data => {
+			// remove tasks from db
+			removeTask(data.taskId, (err, result) => {
+				if (err) {
+					// skip
+				} else {
+
+					complete.push({
+						taskId: data.domId,
+						task: result.task
+					});
+
+				}
+			});
+
+		});
+
+		resolve();
+	});
+
+
+	promise.then(()=> {
+
+		res.json(complete);
+		
+	});
+
 });
 
 app.listen(port, () => {

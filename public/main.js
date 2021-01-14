@@ -2,6 +2,7 @@ $(document).ready(() => {
 
 	let idIncrement = 1;
 	let dbUsername = "";
+	let taskIds = {};
 
 	// Handle User Login
 	$("#login-user").submit(event => {
@@ -50,6 +51,8 @@ $(document).ready(() => {
 
 						$(`#task-${idIncrement}`).find("input").addClass("form-control col-2 mt-1 mb-1");
 
+						taskIds[`task-${idIncrement}`] = data._id.toString();
+						
 						idIncrement++;
 
 					});
@@ -150,10 +153,12 @@ $(document).ready(() => {
 					$("#add").val("");
 					// add task in html
 					$("#tasks").append(`<div id="task-${idIncrement}" class="row ml-1">
-						<label class="border border-secondary rounded col-10 mt-auto"><b>${data}</b></label>
-						<input type="checkbox" value="${data}"></div>`);
+						<label class="border border-secondary rounded col-10 mt-auto"><b>${data.task}</b></label>
+						<input type="checkbox" value="${data.task}"></div>`);
 
 					$(`#task-${idIncrement}`).find("input").addClass("form-control col-2 mt-1 mb-1");
+
+					taskIds[`task-${idIncrement}`] = data.taskId.toString();
 
 					idIncrement++;
 					// remove previous error DOM if present
@@ -173,48 +178,71 @@ $(document).ready(() => {
 		event.preventDefault();
 		let newData = [];
 
-		$.each($("input:checked"), (i, data) => {
-
-			newData.push({
-				id: $(data).parent()[0].id,
-				value: data.value
-			});
-
-		});
-
 		// if not logged in, no server requests needed
-		if (!dbUsername && newData.length) {
-			// move tasks to completed area
-			$.each(newData, (i, task) => {
-				// hide task from current tasks area
-				$(`#${task.id}`).hide();
-				// set html to empty (save for id purposes)
-				$(`#${task.id}`).html("");
-				// add task in html
-				$(".done").append(`<div class="border rounded ml-1 mr-1 mb-1"><b class="ml-1">${task.value}</b></div>`);
-						
+		if (!dbUsername) {
+
+			$.each($("input:checked"), (i, data) => {
+
+				newData.push({
+					id: $(data).parent()[0].id,
+					value: data.value
+				});
+
 			});
 
-		} else if (newData.length) {
+			if (newData.length) {
 
-			$.ajax({
-				type: "POST",
-				url: "/api/complete",
-				data: {data: newData},
+				// move tasks to completed area
+				$.each(newData, (i, task) => {
+					// hide task from current tasks area
+					$(`#${task.id}`).hide();
+					// set html to empty (save for id purposes)
+					$(`#${task.id}`).html("");
+					// add task in html
+					$(".done").append(`<div class="border rounded ml-1 mr-1 mb-1"><b class="ml-1">${task.value}</b></div>`);
+							
+				});
 
-				success: data => {
-					// move tasks to completed area
-					$.each(data, (i, task) => {
-						// hide task from current tasks area
-						$(`#${task.id}`).hide();
-						// set html to empty (save for id purposes)
-						$(`#${task.id}`).html("");
-						// add task in html
-						$(".done").append(`<div class="border rounded ml-1 mr-1 mb-1"><b class="ml-1">${task.value}</b></div>`);
-						
-					});
-				}
+			}
+
+		} else {
+
+			$.each($("input:checked"), (i, data) => {
+
+				newData.push({
+					domId: $(data).parent()[0].id,
+					taskId: taskIds[$(data).parent()[0].id],
+					task: data.value
+				});
+
 			});
+
+			if (newData.length) {
+
+				$.ajax({
+					type: "POST",
+					url: "/api/complete",
+					data: {data: newData},
+
+					success: data => {
+						// move tasks to completed area
+						$.each(newData, (i, data) => {
+							// hide task from current tasks area
+							$(`#${data.domId}`).hide();
+							// set html to empty (save for id purposes)
+							$(`#${data.domId}`).html("");
+							// add task in html
+							$(".done").append(`<div class="border rounded ml-1 mr-1 mb-1"><b class="ml-1">${data.task}</b></div>`);
+							
+						});
+					},
+
+					error: (xhr, err) => {
+						// add error DOM on unsuccessful complete task request
+					}
+				});
+
+			}
 
 		}
 
