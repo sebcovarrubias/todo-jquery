@@ -98,12 +98,18 @@ app.post("/api/signup", (req, res) => {
 
 });
 
+let addTask = require("./db.js").addTask;
+
 // Handle Adding Tasks
 app.post("/api/add", (req, res) => {
-	// data is a string
-	res.send(req.body.data);
-
 	// add task to db
+	addTask(req.body.username, req.body.task, (err, data) => {
+		if (err) {
+			res.sendStatus(500);
+		} else {
+			res.send(data.task);
+		}
+	});
 });
 
 // Handle Completed Tasks

@@ -145,6 +145,12 @@ $(document).ready(() => {
 					$(`#task-${idIncrement}`).find("input").addClass("form-control col-2 mt-1 mb-1");
 
 					idIncrement++;
+					// remove previous error DOM if present
+					console.log(data);
+				},
+
+				error: (xhr, err) => {
+					// add error DOM on unsuccessful add task request
 				}
 			});
 		}
