@@ -27,7 +27,10 @@ $(document).ready(() => {
 				success: data => {
 					// Close modal
 					$("#login-modal").modal("toggle");
-					// Clear screen
+					// Clear current tasks
+					$("#tasks").html(`<h2 class="text-center">To Do</h2><br>`);
+					// Clear completed tasks
+					$(".done").html(`<h2 class="text-center">Done</h2>`);
 					// Populate DOM with tasks
 					// Set username as id in html
 					console.log(data);
@@ -68,7 +71,10 @@ $(document).ready(() => {
 				success: data => {
 					// Close modal
 					$("#signup-modal").modal("toggle");
-					// Clear screen
+					// Clear current tasks
+					$("#tasks").html(`<h2 class="text-center">To Do</h2><br>`);
+					// Clear completed tasks
+					$(".done").html(`<h2 class="text-center">Done</h2>`);
 					// Set username as id in html
 					console.log(data);
 				},
@@ -98,7 +104,7 @@ $(document).ready(() => {
 				success: data => {
 					$("#add").val("");
 
-					$(".tasks").append(`<div id="task-${idIncrement}" class="row ml-1">
+					$("#tasks").append(`<div id="task-${idIncrement}" class="row ml-1">
 						<label class="border border-secondary rounded col-10 mt-auto"><b>${data}</b></label>
 						<input type="checkbox" value="${data}"></div>`);
 
