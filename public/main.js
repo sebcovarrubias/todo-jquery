@@ -91,7 +91,7 @@ $(document).ready(() => {
 
 				error: (xhr, err) => {
 					// Create DOM element in modal for error
-					$("#signup-modal .modal-content").append(`<div class="modal-footer"><h4 class="text-danger">Login Error</h4></div>`);
+					$("#signup-modal .modal-content").append(`<div class="modal-footer"><h4 class="text-danger">Sign Up Error</h4></div>`);
 				}
 			});
 
