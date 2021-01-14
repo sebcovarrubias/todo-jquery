@@ -6,6 +6,8 @@ $(document).ready(() => {
 	$("#login-user").submit(event => {
 
 		event.preventDefault();
+		// remove error element in modal
+		$("#login-modal .modal-footer").remove();
 
 		let username = $("#login-username")[0].value;
 		let password = $("#login-password")[0].value;
@@ -38,7 +40,7 @@ $(document).ready(() => {
 
 				error: (xhr, err) => {
 					// Create DOM element in modal for error
-					console.log(err);
+					$("#login-modal .modal-content").append(`<div class="modal-footer"><h4 class="text-danger">Login Error</h4></div>`);
 				}
 			});
 
@@ -50,6 +52,8 @@ $(document).ready(() => {
 	$("#signup-user").submit(event => {
 
 		event.preventDefault();
+		// remove error element in modal
+		$("#signup-modal .modal-footer").remove();
 
 		let username = $("#signup-username")[0].value;
 		let password = $("#signup-password")[0].value;
@@ -81,7 +85,7 @@ $(document).ready(() => {
 
 				error: (xhr, err) => {
 					// Create DOM element in modal for error
-					console.log(err);
+					$("#signup-modal .modal-content").append(`<div class="modal-footer"><h4 class="text-danger">Login Error</h4></div>`);
 				}
 			});
 
