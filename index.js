@@ -149,10 +149,12 @@ app.post("/api/complete", (req, res) => {
 	promise.then(()=> {
 
 		res.json(complete);
-		
+
 	});
 
 });
+
+module.exports = app;
 
 app.listen(port, () => {
 	console.log(`Listening on Port ${port}`);
