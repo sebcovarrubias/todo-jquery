@@ -18,7 +18,7 @@ let User = mongoose.model("User", userSchema);
 let Task = mongoose.model("Task", taskSchema);
 
 // Check if User exists in the DB
-const findUser = (username, done) => {
+let findUser = (username, done) => {
 	User.findOne({username:username}, (err, data) => {
 		if (err) {
 			// user not found
@@ -31,7 +31,7 @@ const findUser = (username, done) => {
 }
 
 // Add User to DB
-const addUser = (username, hash, salt, done) => {
+let addUser = (username, hash, salt, done) => {
 	let newUser = new User({
 		username: username,
 		hash: hash,
@@ -48,7 +48,7 @@ const addUser = (username, hash, salt, done) => {
 }
 
 // Add Task to DB
-const addTask = (task, username, done) => {
+let addTask = (task, username, done) => {
 	let newTask = new Task({
 		username: username,
 		task: task
@@ -64,7 +64,7 @@ const addTask = (task, username, done) => {
 };
 
 // Remove Task from DB 
-const removeTask = (taskId, done) => {
+let removeTask = (taskId, done) => {
 	Task.remove({_id:taskId}, (err, data) => {
 		if (err) {
 			done(err);
@@ -76,7 +76,7 @@ const removeTask = (taskId, done) => {
 }
 
 // find all Tasks for User
-const findUserTasks = (username, done) => {
+let findUserTasks = (username, done) => {
 	Task.find({username: username}, (err, data) => {
 		if (err) {
 			done(err);
