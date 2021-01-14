@@ -33,8 +33,11 @@ $(document).ready(() => {
 					$("#tasks").html(`<h2 class="text-center">To Do</h2><br>`);
 					// Clear completed tasks
 					$(".done").html(`<h2 class="text-center">Done</h2>`);
-					// Populate DOM with tasks
+					// Remove Login and Signup Buttons
+					$("#login-button").hide();
+					$("#signup-button").hide();
 					// Set username as id in html
+					// Populate DOM with tasks
 					console.log(data);
 				},
 
@@ -79,6 +82,9 @@ $(document).ready(() => {
 					$("#tasks").html(`<h2 class="text-center">To Do</h2><br>`);
 					// Clear completed tasks
 					$(".done").html(`<h2 class="text-center">Done</h2>`);
+					// Remove Login and Signup Buttons
+					$("#login-button").hide();
+					$("#signup-button").hide();
 					// Set username as id in html
 					console.log(data);
 				},
