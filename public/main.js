@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
 	let idIncrement = 1;
-	let dbUsername ="";
+	let dbUsername = "";
 
 	// Handle User Login
 	$("#login-user").submit(event => {
@@ -42,6 +42,17 @@ $(document).ready(() => {
 					dbUsername = data.username;
 					idIncrement = 1;
 					// Populate DOM with tasks
+					data.tasks.forEach(data => {
+						// add task in html
+						$("#tasks").append(`<div id="task-${idIncrement}" class="row ml-1">
+							<label class="border border-secondary rounded col-10 mt-auto"><b>${data.task}</b></label>
+							<input type="checkbox" value="${data.task}"></div>`);
+
+						$(`#task-${idIncrement}`).find("input").addClass("form-control col-2 mt-1 mb-1");
+
+						idIncrement++;
+						
+					});
 
 				},
 
