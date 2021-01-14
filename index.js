@@ -91,7 +91,6 @@ app.post("/api/signup", (req, res) => {
 
 		} else {
 			// User already found, return Sign Up error
-			console.log("User found, return Sign Up error");
 			res.sendStatus(403);
 		}
 
