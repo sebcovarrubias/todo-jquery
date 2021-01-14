@@ -89,7 +89,7 @@ $(document).ready(() => {
 
 	});
 
-	// send a new task to the server
+	// Send a new task to the server
 	$("#add-task").submit(event => {
 
 		event.preventDefault();
@@ -102,8 +102,9 @@ $(document).ready(() => {
 				data: {data:$("#add")[0].value },
 
 				success: data => {
+					// clear task input
 					$("#add").val("");
-
+					// add task in html
 					$("#tasks").append(`<div id="task-${idIncrement}" class="row ml-1">
 						<label class="border border-secondary rounded col-10 mt-auto"><b>${data}</b></label>
 						<input type="checkbox" value="${data}"></div>`);
@@ -117,7 +118,7 @@ $(document).ready(() => {
 		
 	});
 
-	// POST request on task completion
+	// Send task completion to the server
 	$("#current-tasks").submit(event => {
 
 		event.preventDefault();
@@ -140,10 +141,11 @@ $(document).ready(() => {
 			success: data => {
 				// move tasks to completed area
 				$.each(data, (i, task) => {
+					// hide task from current tasks area
 					$(`#${task.id}`).hide();
-
+					// set html to empty (save for id purposes)
 					$(`#${task.id}`).html("");
-
+					// add task in html
 					$(".done").append(`<div class="border rounded ml-1 mr-1 mb-1"><b class="ml-1">${task.value}</b></div>`);
 					
 				});
