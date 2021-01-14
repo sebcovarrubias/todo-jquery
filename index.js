@@ -154,8 +154,6 @@ app.post("/api/complete", (req, res) => {
 
 });
 
-module.exports = app;
-
 app.listen(port, () => {
 	console.log(`Listening on Port ${port}`);
 });
