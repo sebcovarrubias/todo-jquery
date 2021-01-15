@@ -199,7 +199,7 @@ $(document).ready(() => {
 					// set html to empty (save for id purposes)
 					$(`#${task.id}`).html("");
 					// add task in html
-					$(".done").append(`<div class="border rounded ml-1 mr-1 mb-1"><b class="ml-1">${task.value}</b></div>`);
+					$(".done").append(`<div class="completed-task border rounded ml-1 mr-1 mb-1"><b class="ml-1">${task.value}</b></div>`);
 							
 				});
 
@@ -232,7 +232,7 @@ $(document).ready(() => {
 							// set html to empty (save for id purposes)
 							$(`#${data.domId}`).html("");
 							// add task in html
-							$(".done").append(`<div class="border rounded ml-1 mr-1 mb-1"><b class="ml-1">${data.task}</b></div>`);
+							$(".done").append(`<div class="completed-task border rounded ml-1 mr-1 mb-1"><b class="ml-1">${data.task}</b></div>`);
 							
 						});
 					},

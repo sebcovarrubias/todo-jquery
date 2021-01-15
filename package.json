@@ -23,6 +23,7 @@
     "express": "^4.17.1",
     "mocha": "^8.2.1",
     "mongodb": "^3.6.3",
-    "mongoose": "^5.11.11"
+    "mongoose": "^5.11.11",
+    "zombie": "^6.1.4"
   }
 }
